@@ -10,10 +10,7 @@ app.use(bodyParser.json());
 app.post('/createPlayer', (req, res) => {
 	let d = new Date();
 	let date = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-  	console.log(date);
   	let pass = sha(req.body.password).toString('hex');
-  	//let pass = req.body.password;
-  	console.log(pass);
   	ctrl
     	.createPlayer({
     		first_name: req.body.first_name,
