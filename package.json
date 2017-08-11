@@ -4,7 +4,7 @@
   "description": "Game On package",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Scott Russell",
@@ -15,6 +15,7 @@
     "express": "^4.15.4",
     "knex": "^0.13.0",
     "mysql": "^2.14.1",
+    "prettyjson": "^1.2.1",
     "sha512": "0.0.1",
     "sqlite3": "^3.1.9"
   }
