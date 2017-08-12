@@ -2,10 +2,30 @@
 
 let db = require('./db');
 let screen = require('./screen');
+let player = require('./player-repo');
+let game = require('./game-repo');
 
 screen.clear();
 
-db('player').select().then(function(result) {
+player.getPlayer(1).then(function(result) {
+	screen.write(result, "pretty");
+})
+.catch(function(err) {
+	console.error(err);
+});
+
+console.log(" ");
+
+game.getGame(3).then(function(result) {
+	screen.write(result, "pretty");
+})
+.catch(function(err) {
+	console.error(err);
+});
+
+console.log(" ");
+
+game.listPlayersFor(3).then(function(result) {
 	screen.write(result, "pretty");
 })
 .catch(function(err) {
@@ -13,4 +33,4 @@ db('player').select().then(function(result) {
 })
 .finally(function() {
 	db.destroy();
-})
+});

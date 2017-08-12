@@ -16,8 +16,9 @@ exports.up = function(knex, Promise) {
 
 	.createTable('game', function(t) {
 		t.increments().unsigned();
-		t.integer('creator_id', 10).unsigned().notNullable().references('id').inTable('player');
+		t.integer('creator_id', 10).unsigned().notNullable().references('id').inTable('player').onDelete("CASCADE");
 		t.string('title').notNullable();
+		t.string('type').notNullable();
 		t.date('date').notNullable();
 		t.time('time').notNullable();
 		t.float('location_lat', 12, 8).notNullable();
@@ -34,7 +35,7 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
 	return knex.schema
-	.dropTable('player')
-	.dropTable('game')
-	.dropTable('player_game');
+	.dropTableIfExists('player')
+	.dropTableIfExists('game')
+	.dropTableIfExists('player_game');
 };
