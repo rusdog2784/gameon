@@ -14,11 +14,16 @@ exports.up = function(knex, Promise) {
 		t.float('location_joined_long');
 	})
 
+	.createTable('sports', function(t) {
+		t.increments().unsigned();
+		t.string('name').notNullable();
+	})
+
 	.createTable('game', function(t) {
 		t.increments().unsigned();
 		t.integer('creator_id', 10).unsigned().notNullable().references('id').inTable('player').onDelete("CASCADE");
 		t.string('title').notNullable();
-		t.string('type').notNullable();
+		t.integer('sport_id', 10).unsigned().notNullable().references('id').inTable('sports').onDelete("CASCADE");
 		t.date('date').notNullable();
 		t.time('time').notNullable();
 		t.float('location_lat', 12, 8).notNullable();
@@ -35,7 +40,8 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
 	return knex.schema
-	.dropTableIfExists('player')
+	.dropTableIfExists('player_game')
 	.dropTableIfExists('game')
-	.dropTableIfExists('player_game');
+	.dropTableIfExists('sports')
+	.dropTableIfExists('player');
 };

@@ -7,30 +7,22 @@ let game = require('./game-repo');
 
 screen.clear();
 
-player.getPlayer(1).then(function(result) {
-	screen.write(result, "pretty");
+var game_data = {};
+
+game.getGame(1).then(function(result) {
+	game_data = result;
 })
 .catch(function(err) {
 	console.error(err);
-});
-
-console.log(" ");
-
-game.getGame(3).then(function(result) {
-	screen.write(result, "pretty");
 })
-.catch(function(err) {
-	console.error(err);
-});
 
-console.log(" ");
-
-game.listPlayersFor(3).then(function(result) {
-	screen.write(result, "pretty");
+game.listPlayersFor(1).then(function(result) {
+	game_data['players'] = result;
 })
 .catch(function(err) {
 	console.error(err);
 })
 .finally(function() {
+	screen.write(game_data, "pretty");
 	db.destroy();
 });
